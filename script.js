@@ -14,9 +14,7 @@ function openDialog(noteId = null) {
     if (noteId) {
         //Editing mode
         const noteToEdit = notes.find(note => note.id == noteId)
-        console.log(noteToEdit);
         currentNoteID = noteId
-        console.log(currentNoteID);
         document.getElementById("dialogTitle").textContent = "Editar nota";
         titleInput.value = noteToEdit.title
         contentInput.value = noteToEdit.content
