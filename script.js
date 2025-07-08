@@ -1,13 +1,32 @@
 let notes = []
+let currentNoteID = null
+
 function loadNotes() {
     const savedNotes = localStorage.getItem("notes")
     return savedNotes ? JSON.parse(savedNotes) : []
 }
 
-function openDialog() {
+function openDialog(noteId = null) {
     const dialog = document.getElementById("noteDialog");
     const titleInput = document.getElementById("noteTitle");
     const contentInput = document.getElementById("noteContent");
+
+    if (noteId) {
+        //Editing mode
+        const noteToEdit = notes.find(note => note.id == noteId)
+        console.log(noteToEdit);
+        currentNoteID = noteId
+        console.log(currentNoteID);
+        document.getElementById("dialogTitle").textContent = "Editar nota";
+        titleInput.value = noteToEdit.title
+        contentInput.value = noteToEdit.content
+    } else {
+        //Add note
+        currentNoteID = null
+        document.getElementById("dialogTitle").textContent = "Añadir nota"
+        titleInput.value = ""
+        contentInput.value = ""
+    }
 
     dialog.showModal()
     titleInput.focus()
@@ -17,10 +36,6 @@ function closeDialog() {
     document.getElementById("noteDialog").close()
 }
 
-const addButton = document.querySelectorAll(".add-note-btn");
-addButton.forEach(btn => {
-    btn.addEventListener("click", openDialog)
-});
 
 const cancelButton = document.querySelector(".close-btn").addEventListener("click", closeDialog);
 const closeButton = document.querySelector(".cancel-btn").addEventListener("click", closeDialog);
@@ -44,6 +59,11 @@ function saveNote(e) {
     const title = document.getElementById("noteTitle").value;
     const content = document.getElementById("noteContent").value;
 
+    if (currentNoteID) {
+        //Update existing note
+
+    }
+
     notes.unshift({
         id : randomID(),
         title : title,
@@ -60,6 +80,12 @@ function randomID() {
 
 function saveAllNotes() {
     localStorage.setItem("notes", JSON.stringify(notes))
+}
+
+function deleteNote(noteId) {
+    notes = notes.filter(note => note.id != noteId)
+    saveAllNotes()
+    showNotes()
 }
 
 function showNotes() {
