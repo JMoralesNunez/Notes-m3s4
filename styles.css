@@ -7,7 +7,7 @@
 }
 
 :root {
-  --brand-color: #8b90ff;
+  --brand-color: #fd801a;
   --base-color: #f2f4f8;
   --surface-color: #fff;
   --text-color: #191b23;
@@ -17,7 +17,7 @@
 }
 
 .dark-theme {
-  --brand-color: #8b90ff;
+  --brand-color: #fd801a;
   --base-color: #1e1f26;
   --surface-color: #2c2f38;
   --text-color: #f0f0f0;
@@ -60,7 +60,7 @@ header {
 }
 
 .add-note-btn:hover {
-  background: #7a7fff;
+  background: #e65c00;
 }
 
 .theme-toggle-btn {

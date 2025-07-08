@@ -38,9 +38,23 @@ function closeDialog() {
 const cancelButton = document.querySelector(".close-btn").addEventListener("click", closeDialog);
 const closeButton = document.querySelector(".cancel-btn").addEventListener("click", closeDialog);
 
+function toggleTheme() {
+    const isDark = document.body.classList.toggle("dark-theme")
+    localStorage.setItem("theme", isDark ? "dark" : "light")
+}
+
+function applyTheme() {
+    if (localStorage.getItem("theme") == "dark") {
+        document.body.classList.add("dark-theme")
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+    applyTheme()
     notes = loadNotes()
     showNotes()
+
+    document.getElementById("themeToggleBtn").addEventListener("click", toggleTheme)
     document.getElementById("noteDialog").addEventListener("click", function(e){
         if(e.target === this){
             closeDialog()
@@ -59,15 +73,21 @@ function saveNote(e) {
 
     if (currentNoteID) {
         //Update existing note
-
-    }
-
-    notes.unshift({
+        const noteIndex = notes.findIndex(note => note.id == currentNoteID);
+        notes[noteIndex] = {
+            ...notes[noteIndex],
+            title: title,
+            content: content
+        }
+    } else {
+        //Add note
+        notes.unshift({
         id : randomID(),
         title : title,
         content : content
     })
-
+    }
+    closeDialog()
     saveAllNotes()
     showNotes()
 }
