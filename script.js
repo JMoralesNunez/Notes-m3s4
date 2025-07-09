@@ -147,3 +147,5 @@ function clearNotes() {
     saveAllNotes()
     showNotes()
 }
+
+const clearBtn = document.getElementById("clearBtn").addEventListener("click", clearNotes)
