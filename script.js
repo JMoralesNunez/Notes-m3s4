@@ -141,3 +141,9 @@ function showNotes() {
     `).join('')
     }
 }
+
+function clearNotes() {
+    localStorage.removeItem("notes")
+    saveAllNotes()
+    showNotes()
+}
