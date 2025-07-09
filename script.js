@@ -148,4 +148,4 @@ function clearNotes() {
     showNotes()
 }
 
-const clearBtn = document.getElementById("clearBtn").addEventListener("click", clearNotes)
+const clearBtn = document.getElementById("clearBtn").addEventListener("click", clearNotes())
