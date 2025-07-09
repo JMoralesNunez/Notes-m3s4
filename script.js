@@ -143,9 +143,9 @@ function showNotes() {
 }
 
 function clearNotes() {
-    localStorage.removeItem("notes")
+    notes = []
     saveAllNotes()
     showNotes()
 }
 
-const clearBtn = document.getElementById("clearBtn").addEventListener("click", clearNotes())
+const clearBtn = document.getElementById("clearBtn").addEventListener("click", clearNotes)
